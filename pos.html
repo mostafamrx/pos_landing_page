@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحديث POS | نظام الكاشير الذكي للمحلات والمطاعم</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0B1120',
+                        onyx: '#0F172A',
+                        electric: '#0EA5E9',
+                        mint: '#10B981',
+                    },
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-midnight text-white font-sans antialiased selection:bg-electric selection:text-white overflow-x-hidden min-h-screen flex flex-col justify-between">
+    
+    <!-- ==================== الهيدر البسيط (الشعار وزر واتساب سريع) ==================== -->
+    <header class="w-full bg-midnight/90 backdrop-blur-md border-b border-gray-800/80 fixed top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            <!-- اللوجو مربوط بالموقع الرسمي على Vercel -->
+            <a href="https://tahdeeth-website.vercel.app/" target="_blank" class="flex items-center cursor-pointer hover:opacity-90 transition-opacity duration-300">
+                <img src="assets/images/logo.png" alt="تحديث" class="h-14 sm:h-16 w-auto object-contain">
+            </a>
+            
+            <a href="https://wa.me/201030654348" target="_blank" class="bg-onyx hover:bg-gray-800 border border-gray-700 text-mint px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.8.52 3.48 1.42 4.9L2.2 21.8l5.05-1.18C8.62 21.48 10.26 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm3.6 14.4c-.2.55-1.17 1.05-1.62 1.1-.42.05-.85.12-2.75-.62-2.32-.92-3.8-3.25-3.92-3.4-.12-.15-.95-1.25-.95-2.4 0-1.15.6-1.72.82-1.95.22-.22.48-.28.65-.28.18 0 .35 0 .5.02.18.02.42-.08.65.48.25.6.85 2.05.92 2.2.08.15.12.32.02.5-.1.18-.15.3-.3.48-.15.18-.32.4-.45.52-.15.15-.3.32-.12.62.18.3.8 1.3 1.7 2.1 1.18 1.05 2.18 1.38 2.5 1.52.3.15.48.12.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.68-.15.28.1 1.78.85 2.08 1 .3.15.5.22.58.35.08.12.08.72-.12 1.28z"/></svg>
+                <span>دعم المطور (واتساب)</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ==================== القسم الرئيسي: نموذج التحميل والمميزات ==================== -->
+    <main class="pt-28 pb-16 flex-grow flex items-center relative">
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-electric/15 rounded-full blur-[160px] pointer-events-none -z-10"></div>
+        <div class="absolute bottom-10 right-10 w-[300px] h-[300px] bg-mint/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- العمود الأيمن: إقناع العميل ومميزات النظام -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-electric/10 border border-electric/30 text-electric text-xs sm:text-sm font-extrabold shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-electric animate-ping"></span>
+                        <span>نسخة سطح المكتب (Windows Desktop POS)</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight">
+                        إدارة محلك أصبحت أسهل مع <span class="text-transparent bg-clip-text bg-gradient-to-l from-electric via-cyan-400 to-mint">تحديث POS</span>
+                    </h1>
+
+                    <p class="text-gray-300 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
+                        نظام كاشير ومبيعات فائق السرعة يعمل بدون إنترنت نهائياً. تم تصميمه خصيصاً للمحلات التجارية، السوبر ماركت، والمطاعم لضبط المخزون والأرباح بضغطة زر.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 max-w-xl mx-auto lg:mx-0 text-left dir-rtl">
+                        <div class="bg-onyx/90 border border-gray-800/80 p-4 rounded-2xl flex items-start gap-3.5 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-mint/10 border border-mint/20 flex items-center justify-center text-mint flex-shrink-0 mt-0.5">⚡</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm sm:text-base">يعمل أوفلاين 100%</h4>
+                                <p class="text-xs text-gray-400 mt-0.5">لا يتوقف عملك أبداً حتى لو انقطع الإنترنت تماماً عن المحل.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-onyx/90 border border-gray-800/80 p-4 rounded-2xl flex items-start gap-3.5 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-electric/10 border border-electric/20 flex items-center justify-center text-electric flex-shrink-0 mt-0.5">🛡️</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm sm:text-base">حماية ومنع الهدر</h4>
+                                <p class="text-xs text-gray-400 mt-0.5">ضبط الورديات، جرد المخزون، وصلاحيات محددة لكل كاشير.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-onyx/90 border border-gray-800/80 p-4 rounded-2xl flex items-start gap-3.5 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 flex-shrink-0 mt-0.5">📊</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm sm:text-base">تقارير أرباح دقيقة</h4>
+                                <p class="text-xs text-gray-400 mt-0.5">اعرف صافي أرباحك اليومية والشهرية، وأكثر الأصناف مبيعاً.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-onyx/90 border border-gray-800/80 p-4 rounded-2xl flex items-start gap-3.5 shadow-sm">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 flex-shrink-0 mt-0.5">🖨️</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm sm:text-base">توافق مع العتاد</h4>
+                                <p class="text-xs text-gray-400 mt-0.5">يدعم جميع طابعات الفواتير الحرارية، أجهزة الباركود، وأدراج النقدية.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- العمود الأيسر: بطاقة التحميل الإجباري -->
+                <div class="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none">
+                    <div class="bg-onyx/90 border-2 border-electric/40 rounded-3xl p-6 sm:p-8 shadow-[0_0_50px_rgba(14,165,233,0.15)] relative">
+                        
+                        <div class="bg-gradient-to-r from-electric/20 to-mint/20 border border-electric/30 rounded-2xl p-4 text-center mb-6">
+                            <span class="text-xs text-gray-300 block font-semibold uppercase tracking-wider mb-1">العرض الحالي</span>
+                            <span class="text-lg sm:text-xl font-black text-white">🎉 احصل على 7 أيام تجربة مجانية كاملة</span>
+                            <span class="text-[11px] text-mint block mt-0.5 font-bold">بدون بطاقة ائتمان • بدون قيود على الميزات</span>
+                        </div>
+
+                        <div class="text-center mb-6">
+                            <h3 class="text-xl font-bold text-white">ابدأ التحميل الفوري الآن</h3>
+                            <p class="text-xs text-gray-400 mt-1">سيبدأ تحميل ملف التثبيت (.EXE) فور إدخال بيانات محلك</p>
+                        </div>
+
+                        <!-- نموذج التحميل (تم إضافة IDs لتفعيل القفل) -->
+                        <form id="posDownloadForm" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 mb-1.5">اسم المحل أو النشاط التجاري</label>
+                                <input type="text" id="shopNameInput" name="shopName" required placeholder="مثال: سوبر ماركت السلام / مطعم البركة" class="w-full bg-midnight border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-electric focus:ring-1 focus:ring-electric text-sm transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-gray-300 mb-1.5">رقم الواتساب (لإرسال شرح التشغيل والدعم الفني)</label>
+                                <input type="tel" id="phoneInput" name="phone" required placeholder="010xxxxxxxx" class="w-full bg-midnight border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-electric focus:ring-1 focus:ring-electric text-sm transition-all dir-ltr text-right">
+                            </div>
+
+                            <!-- صندوق رسالة النجاح -->
+                            <div id="dlSuccessMsg" class="hidden bg-mint/15 border border-mint/40 text-mint p-3.5 rounded-xl text-center text-xs font-bold leading-relaxed">
+                                ✓ تم تسجيل بياناتك! يبدأ تحميل برنامج الكاشير الآن...<br>
+                                <span class="text-gray-300 font-normal">إذا لم يبدأ التحميل تلقائياً، </span>
+                                <a href="assets/downloads/Tahdeeth_POS_Setup.exe" class="underline font-black text-white" download>اضغط هنا للتحميل المباشر</a>.
+                            </div>
+
+                            <!-- زر التحميل -->
+                            <button type="submit" id="dlSubmitBtn" class="w-full bg-gradient-to-r from-electric via-cyan-500 to-mint hover:opacity-95 text-midnight font-black py-4 rounded-xl text-base sm:text-lg transition-all duration-300 shadow-[0_0_25px_rgba(16,185,129,0.3)] hover:shadow-[0_0_35px_rgba(16,185,129,0.6)] flex items-center justify-center gap-2.5 cursor-pointer">
+                                <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span>تحميل كاشير تحديث (.EXE)</span>
+                            </button>
+                        </form>
+
+                        <div class="mt-6 pt-4 border-t border-gray-800/80 flex items-center justify-between text-[11px] text-gray-500">
+                            <span class="flex items-center gap-1">💻 متوافق مع Windows 10 & 11</span>
+                            <span class="flex items-center gap-1">🔒 خالي من الفيروسات 100%</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ==================== الفوتر البسيط ==================== -->
+    <footer class="w-full bg-midnight py-6 border-t border-gray-900 text-center">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+            <p>&copy; 2026 شركة تحديث للحلول الرقمية. جميع الحقوق محفوظة.</p>
+            <div class="flex gap-6 font-medium text-gray-400">
+                <a href="https://tahdeeth-website.vercel.app/" target="_blank" class="hover:text-electric transition-colors">الموقع الرئيسي</a>
+                <a href="https://wa.me/201030654348" target="_blank" class="hover:text-mint transition-colors">الدعم الفني عبر واتساب</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== سكربت إرسال البيانات والتحميل الإجباري ==================== -->
+    <script>
+        // 1. مسار ملف التثبيت (.exe) على موقعك
+        const EXE_FILE_URL = "https://github.com/mostafamrx/Tahdeeth-POS-System/releases/download/v1.0.0/Tahdeeth_POS_Setup.exe"; 
+
+        // 2. 🟢 هام جداً: ضع هنا رابط الـ Web App الطويل المستخرج من شيت الجوجل الجديد (1NWpw5...) 🟢
+        // رابط جوجل شيت الذي سيسجل أرقام المحلات عند التحميل
+const LEADS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwGWqtkjRI4oZdn7lNU8V8ZcuEwcKZabZFyRzxaN_q8aIMTEK-cCldpvXohTHqdgg5S/exec';
+
+        const dlForm = document.getElementById('posDownloadForm');
+        const dlBtn = document.getElementById('dlSubmitBtn');
+        const dlMsg = document.getElementById('dlSuccessMsg');
+
+        if (dlForm) {
+            dlForm.addEventListener('submit', function(e) {
+                // منع المتصفح من إرسال النموذج بالطريقة التقليدية
+                e.preventDefault();
+                
+                const shopName = document.getElementById('shopNameInput').value.trim();
+                const phone = document.getElementById('phoneInput').value.trim();
+
+                // قفل أمني: منع التحميل إذا كان الحقل فارغاً أو الرقم غير مكتمل
+                if (!shopName || !phone || phone.length < 8) {
+                    alert('⚠️ يرجى إدخال اسم المحل ورقم واتساب صحيح لكي تتمكن من تحميل البرنامج.');
+                    return;
+                }
+
+                // تغيير حالة الزر لبيان بدء العملية
+                dlBtn.innerHTML = '⌛ جاري تسجيل بياناتك وبدء التحميل...';
+                dlBtn.disabled = true;
+                dlBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+                // إعداد البيانات للإرسال (تأخذ shopName و phone تلقائياً من النموذج)
+                const formData = new FormData(dlForm);
+
+                // إرسال البيانات لشيت عملاء الكاشير الجديد
+                fetch(LEADS_SHEET_URL, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    // لا يتم إطلاق التحميل إلا بعد نجاح الإرسال
+                    executeDownloadSuccess();
+                })
+                .catch(error => {
+                    console.error('Error saving lead:', error);
+                    // في حال وجود مانع إعلانات أو ضعف شبكة عند العميل، نسمح له بالتحميل حتى لا نخسره
+                    executeDownloadSuccess();
+                });
+            });
+        }
+
+        function executeDownloadSuccess() {
+            dlMsg.classList.remove('hidden');
+            dlForm.reset();
+            dlBtn.innerHTML = '✓ بدأ التحميل (اضغط للتحميل مجدداً)';
+            dlBtn.disabled = false;
+            dlBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+            // إنشاء رابط وهمي والضغط عليه برمجياً لبدء تحميل الـ EXE تلقائياً
+            const downloadLink = document.createElement('a');
+            downloadLink.href = EXE_FILE_URL;
+            downloadLink.setAttribute('download', '');
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+    </script>
+</body>
+</html>
