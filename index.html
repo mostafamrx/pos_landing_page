@@ -165,72 +165,79 @@
     </footer>
 
     <!-- ==================== سكربت إرسال البيانات والتحميل الإجباري ==================== -->
-    <script>
-        // 1. مسار ملف التثبيت (.exe) على موقعك
-        const EXE_FILE_URL = "https://github.com/mostafamrx/Tahdeeth-POS-System/releases/download/v1.0.0/Tahdeeth_POS_Setup.zip"; 
+<!-- ==================== سكربت إرسال البيانات والتحميل الإجباري ==================== -->
+<script>
+    // 1. رابط ملف التثبيت المباشر من GitHub (تأكد أنه صحيح ويعمل)
+    const EXE_FILE_URL = "https://github.com/mostafamrx/Tahdeeth-POS-System/releases/download/v1.0.0/Tahdeeth_POS_Setup.zip"; 
 
-        // 2. 🟢 هام جداً: ضع هنا رابط الـ Web App الطويل المستخرج من شيت الجوجل الجديد (1NWpw5...) 🟢
-        // رابط جوجل شيت الذي سيسجل أرقام المحلات عند التحميل
-const LEADS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwGWqtkjRI4oZdn7lNU8V8ZcuEwcKZabZFyRzxaN_q8aIMTEK-cCldpvXohTHqdgg5S/exec';
+    // 2. رابط Google Apps Script
+    const LEADS_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwGWqtkjRI4oZdn7lNU8V8ZcuEwcKZabZFyRzxaN_q8aIMTEK-cCldpvXohTHqdgg5S/exec';
 
-        const dlForm = document.getElementById('posDownloadForm');
-        const dlBtn = document.getElementById('dlSubmitBtn');
-        const dlMsg = document.getElementById('dlSuccessMsg');
+    const dlForm = document.getElementById('posDownloadForm');
+    const dlBtn = document.getElementById('dlSubmitBtn');
+    const dlMsg = document.getElementById('dlSuccessMsg');
 
-        if (dlForm) {
-            dlForm.addEventListener('submit', function(e) {
-                // منع المتصفح من إرسال النموذج بالطريقة التقليدية
-                e.preventDefault();
-                
-                const shopName = document.getElementById('shopNameInput').value.trim();
-                const phone = document.getElementById('phoneInput').value.trim();
+    if (dlForm) {
+        dlForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // منع إرسال النموذج بالطريقة التقليدية
+            
+            const shopName = document.getElementById('shopNameInput').value.trim();
+            const phone = document.getElementById('phoneInput').value.trim();
 
-                // قفل أمني: منع التحميل إذا كان الحقل فارغاً أو الرقم غير مكتمل
-                if (!shopName || !phone || phone.length < 8) {
-                    alert('⚠️ يرجى إدخال اسم المحل ورقم واتساب صحيح لكي تتمكن من تحميل البرنامج.');
-                    return;
-                }
+            // التحقق الصارم من صحة البيانات قبل السماح بأي تحميل
+            if (!shopName || !phone || phone.length < 8) {
+                alert('⚠️ يرجى إدخال اسم المحل ورقم واتساب صحيح لكي تتمكن من تحميل البرنامج.');
+                return;
+            }
 
-                // تغيير حالة الزر لبيان بدء العملية
-                dlBtn.innerHTML = '⌛ جاري تسجيل بياناتك وبدء التحميل...';
-                dlBtn.disabled = true;
-                dlBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            // تغيير حالة الزر أثناء إرسال البيانات إلى شيت الجوجل
+            dlBtn.innerHTML = '⌛ جاري حفظ البيانات وتجهيز الملف...';
+            dlBtn.disabled = true;
+            dlBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-                // إعداد البيانات للإرسال (تأخذ shopName و phone تلقائياً من النموذج)
-                const formData = new FormData(dlForm);
+            const formData = new FormData(dlForm);
 
-                // إرسال البيانات لشيت عملاء الكاشير الجديد
-                fetch(LEADS_SHEET_URL, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    // لا يتم إطلاق التحميل إلا بعد نجاح الإرسال
-                    executeDownloadSuccess();
-                })
-                .catch(error => {
-                    console.error('Error saving lead:', error);
-                    // في حال وجود مانع إعلانات أو ضعف شبكة عند العميل، نسمح له بالتحميل حتى لا نخسره
-                    executeDownloadSuccess();
-                });
+            // إرسال البيانات إلى Google Sheets (مع حل مشكلة الـ CORS)
+            fetch(LEADS_SHEET_URL, {
+                method: 'POST',
+                mode: 'no-cors', // 🟢 هذا السطر إجباري لضمان إرسال البيانات لشيت جوجل
+                body: formData
+            })
+            .then(() => {
+                console.log('✅ تم إرسال البيانات بنجاح إلى الشيت');
+                executeDownloadSuccess();
+            })
+            .catch(error => {
+                console.error('❌ حدث خطأ في الاتصال:', error);
+                // للسماح للعميل بالتحميل حتى في حال وجود مانع إعلانات يحجب جوجل
+                executeDownloadSuccess();
             });
+        });
+    }
+
+    function executeDownloadSuccess() {
+        // إظهار رسالة النجاح وتعديل الرابط المباشر بداخلها ليكون آمناً
+        dlMsg.classList.remove('hidden');
+        
+        // تحديث الرابط النصي داخل صندوق النجاح ليوجه للملف الصحيح
+        const directLinkTag = dlMsg.querySelector('a');
+        if (directLinkTag) {
+            directLinkTag.href = EXE_FILE_URL;
         }
 
-        function executeDownloadSuccess() {
-            dlMsg.classList.remove('hidden');
-            dlForm.reset();
-            dlBtn.innerHTML = '✓ بدأ التحميل (اضغط للتحميل مجدداً)';
-            dlBtn.disabled = false;
-            dlBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        dlForm.reset();
+        dlBtn.innerHTML = '✓ بدأ التحميل تلقائياً (اضغط للتحميل مجدداً)';
+        dlBtn.disabled = false;
+        dlBtn.classList.remove('opacity-50', 'cursor-not-allowed');
 
-            // إنشاء رابط وهمي والضغط عليه برمجياً لبدء تحميل الـ EXE تلقائياً
-            const downloadLink = document.createElement('a');
-            downloadLink.href = EXE_FILE_URL;
-            downloadLink.setAttribute('download', '');
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        }
-    </script>
+        // بدء التحميل الإجباري في متصفح العميل
+        const downloadLink = document.createElement('a');
+        downloadLink.href = EXE_FILE_URL;
+        downloadLink.setAttribute('download', '');
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
+</script>
 </body>
 </html>
